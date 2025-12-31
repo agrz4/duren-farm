@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import Header from './components/Header';
 import ProductCard from './components/ProductCard';
 import DeliveryTracker from './components/DeliveryTracker';
-import { StatsDashboard, OrderHistory } from './components/StatsDashboard';
+import { StatsDashboard } from './components/StatsDashboard';
+import OrderHistory from './components/OrderHistory';
 import type { Product, OrderLog } from './types';
 import { MdOutlineInventory2 } from 'react-icons/md';
 
@@ -12,7 +13,44 @@ const App: React.FC = () => {
     { id: 2, name: "Durian Bawor", stock: 5, total: 20, price: 120000, harvestTime: "06:15" }
   ]);
   const [revenue, setRevenue] = useState(0);
-  const [logs, setLogs] = useState<OrderLog[]>([]);
+  const [logs, setLogs] = useState<OrderLog[]>([
+    {
+      id: "DUR-8821",
+      productName: "Musang King Super",
+      time: "10:45",
+      amount: 150000,
+      status: 'Selesai'
+    },
+    {
+      id: "DUR-8819",
+      productName: "Durian Bawor",
+      time: "09:12",
+      amount: 120000,
+      status: 'Selesai'
+    },
+    {
+      id: "DUR-8815",
+      productName: "Musang King",
+      time: "08:30",
+      amount: 150000,
+      status: 'Selesai'
+    },
+    {
+      id: "DUR-8790",
+      productName: "Durian Montong",
+      time: "Kemarin, 19:20",
+      amount: 95000,
+      status: 'Selesai'
+    },
+    {
+      id: "DUR-8788",
+      productName: "Black Thorn",
+      time: "Kemarin, 16:45",
+      amount: 250000,
+      status: 'Selesai'
+    }
+  ]);
+
   const [orderStatus, setOrderStatus] = useState(1);
 
   const handleBuy = (id: number) => {
@@ -38,7 +76,7 @@ const App: React.FC = () => {
       <div className="max-w-4xl mx-auto space-y-10">
         <Header />
         <StatsDashboard revenue={revenue} sold={logs.length} />
-        
+
         <section className="space-y-6">
           <h2 className="flex items-center gap-2 text-lg font-bold text-slate-800 px-2">
             <MdOutlineInventory2 className="text-emerald-600" /> Stok Hari Ini

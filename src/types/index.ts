@@ -12,4 +12,5 @@ export interface OrderLog {
     productName: string;
     time: string;
     amount: number;
+    status: 'Selesai' | 'Proses';
 }
