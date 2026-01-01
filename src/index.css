@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+@layer base {
+  body {
+    @apply bg-[#FDFDFD] text-slate-900 antialiased;
+  }
+}
+
+.glass-card {
+  @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-[0_8px_32px_0_rgba(31,38,135,0.07)];
+}
+
+.glow-emerald {
+  @apply shadow-[0_0_20px_rgba(16,185,129,0.2)];
+}
