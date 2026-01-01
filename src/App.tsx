@@ -7,11 +7,12 @@ import ProductCard from './components/ProductCard';
 import DeliveryTracker from './components/DeliveryTracker';
 import type { Product, OrderLog } from './types';
 import { MdOutlineInventory2 } from 'react-icons/md';
+import musangKingImg from './assets/img/musang king.png';
 
 const App: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([
-    { id: 1, name: "Musang King", stock: 12, total: 30, price: 150000, harvestTime: "05:30" },
-    { id: 2, name: "Durian Bawor", stock: 5, total: 20, price: 120000, harvestTime: "06:15" }
+    { id: 1, name: "Musang King", stock: 12, total: 30, price: 150000, harvestTime: "05:30", image: musangKingImg },
+    { id: 2, name: "Durian Bawor", stock: 5, total: 20, price: 120000, harvestTime: "06:15", image: musangKingImg }
   ]);
   const [revenue, setRevenue] = useState(0);
   const [logs, setLogs] = useState<OrderLog[]>([
@@ -85,10 +86,6 @@ const App: React.FC = () => {
             <p className="text-slate-400 text-sm">Time to rise up for today's harvest</p>
           </div>
           <div className="flex items-center gap-6">
-            <div className="text-right">
-              <p className="text-[10px] font-bold text-slate-400 uppercase">Your balance</p>
-              <p className="text-xl font-bold text-emerald-600">$566.55</p>
-            </div>
             <img src="https://ui-avatars.com/api/?name=Liz+Farmer&background=random" className="w-12 h-12 rounded-2xl border-2 border-white shadow-sm" alt="profile" />
           </div>
         </div>
@@ -137,13 +134,6 @@ const App: React.FC = () => {
 
               {/* Sidebar Content Area (Right) */}
               <div className="col-span-12 lg:col-span-4 space-y-6">
-                {/* Promo/Info Card */}
-                <div className="bg-orange-500 rounded-[2.5rem] p-8 text-white relative overflow-hidden group h-48">
-                  <p className="text-lg font-bold relative z-10">Need more information?</p>
-                  <p className="text-xs opacity-80 mt-2 relative z-10">Present information in a visually appealing way.</p>
-                  <button className="mt-6 bg-white text-orange-600 px-6 py-2 rounded-full text-xs font-bold relative z-10">See more &gt;</button>
-                  <div className="absolute top-0 right-0 w-full h-full bg-black/10 group-hover:bg-transparent transition-all"></div>
-                </div>
 
                 <div className="bg-white border border-slate-50 rounded-[2.5rem] p-8 shadow-sm">
                   <DeliveryTracker currentStatus={orderStatus} onUpdateStatus={() => setOrderStatus(s => (s + 1) % 4)} />
@@ -158,7 +148,7 @@ const App: React.FC = () => {
                   <div className="space-y-4">
                     {[1, 2, 3].map(i => (
                       <div key={i} className="flex items-center gap-4 p-2 hover:bg-slate-50 rounded-2xl transition">
-                        <div className="w-12 h-12 bg-slate-100 rounded-xl"></div>
+                        <img src={musangKingImg} alt="Best Seller" className="w-12 h-12 rounded-xl object-cover" />
                         <div>
                           <p className="text-sm font-bold text-slate-800">Durian Musang</p>
                           <p className="text-[10px] text-slate-400">4.8/5 ⭐</p>

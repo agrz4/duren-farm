@@ -5,6 +5,7 @@ export interface Product {
     total: number;
     price: number;
     harvestTime: string;
+    image?: string;
 }
 
 export interface OrderLog {

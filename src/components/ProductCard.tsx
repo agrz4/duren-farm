@@ -14,11 +14,25 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onBuy, onAddStock })
   return (
     <div className="group bg-white rounded-[2.5rem] p-2 border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-500">
       {/* Area Gambar / Visual */}
-      <div className="bg-slate-100 h-48 rounded-[2rem] mb-4 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-        <div className="absolute top-4 left-4">
-          <span className="bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider shadow-sm">
-             {product.harvestTime} • Freshly Fallen
+      <div className="bg-slate-100 h-48 rounded-[2rem] mb-4 relative overflow-hidden group-hover:scale-[1.02] transition-transform duration-500">
+        {product.image ? (
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <div className="w-full h-full bg-slate-200 flex items-center justify-center text-slate-400">
+            <span className="text-xs font-bold uppercase">No Image</span>
+          </div>
+        )}
+
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+        <div className="absolute top-4 left-4 z-10">
+          <span className="bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider shadow-sm flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            {product.harvestTime} • Fresh
           </span>
         </div>
       </div>
@@ -38,18 +52,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onBuy, onAddStock })
 
         <div className="space-y-4">
           <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
-            <div 
+            <div
               className={`h-full transition-all duration-1000 ease-out ${isLowStock ? 'bg-orange-500' : 'bg-emerald-500'}`}
               style={{ width: `${(product.stock / product.total) * 100}%` }}
             />
           </div>
-          
-          <button 
+
+          <button
             onClick={() => onBuy(product.id)}
             disabled={product.stock === 0}
             className={`w-full py-4 rounded-2xl font-bold text-sm transition-all duration-300 shadow-lg
-              ${product.stock > 0 
-                ? 'bg-slate-900 text-white hover:bg-emerald-600 hover:shadow-emerald-200' 
+              ${product.stock > 0
+                ? 'bg-slate-900 text-white hover:bg-emerald-600 hover:shadow-emerald-200'
                 : 'bg-slate-100 text-slate-400 cursor-not-allowed shadow-none'}`}
           >
             {product.stock > 0 ? 'Add to Cart' : 'Sold Out'}
