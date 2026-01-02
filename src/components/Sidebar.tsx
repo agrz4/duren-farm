@@ -1,15 +1,18 @@
 import React from 'react';
 import { MdOutlineDashboard, MdOutlineInventory2, MdOutlineAnalytics, MdOutlineChatBubbleOutline, MdOutlineStarOutline } from "react-icons/md";
 import { HiOutlineShoppingBag } from "react-icons/hi2";
+import { Link, useLocation } from 'react-router-dom';
 
 const Sidebar: React.FC = () => {
+  const location = useLocation();
+
   const menus = [
-    { name: 'Dashboard', icon: <MdOutlineDashboard />, active: true },
-    { name: 'Product', icon: <MdOutlineInventory2 /> },
-    { name: 'Analytics', icon: <MdOutlineAnalytics /> },
-    { name: 'Sale', icon: <HiOutlineShoppingBag /> },
-    { name: 'Review', icon: <MdOutlineStarOutline /> },
-    { name: 'Chat', icon: <MdOutlineChatBubbleOutline /> },
+    { name: 'Dashboard', icon: <MdOutlineDashboard />, path: '/' },
+    { name: 'Product', icon: <MdOutlineInventory2 />, path: '/products' },
+    { name: 'Analytics', icon: <MdOutlineAnalytics />, path: '/analytics' },
+    { name: 'Sale', icon: <HiOutlineShoppingBag />, path: '/sales' },
+    { name: 'Review', icon: <MdOutlineStarOutline />, path: '/reviews' },
+    { name: 'Chat', icon: <MdOutlineChatBubbleOutline />, path: '/chat' },
   ];
 
   return (
@@ -21,16 +24,21 @@ const Sidebar: React.FC = () => {
 
       <nav className="space-y-2">
         <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest px-3 mb-4">Menu</p>
-        {menus.map((menu) => (
-          <div
-            key={menu.name}
-            className={`flex items-center gap-3 px-4 py-3 rounded-2xl cursor-pointer transition-all ${menu.active ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-100' : 'text-slate-500 hover:bg-slate-50'
-              }`}
-          >
-            <span className="text-xl">{menu.icon}</span>
-            <span className="text-sm font-semibold">{menu.name}</span>
-          </div>
-        ))}
+        {menus.map((menu) => {
+          const isActive = location.pathname === menu.path || (menu.path !== '/' && location.pathname.startsWith(menu.path));
+
+          return (
+            <Link key={menu.name} to={menu.path}>
+              <div
+                className={`flex items-center gap-3 px-4 py-3 rounded-2xl cursor-pointer transition-all mb-1 ${isActive ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-100' : 'text-slate-500 hover:bg-slate-50'
+                  }`}
+              >
+                <span className="text-xl">{menu.icon}</span>
+                <span className="text-sm font-semibold">{menu.name}</span>
+              </div>
+            </Link>
+          );
+        })}
       </nav>
 
       {/* Promo Card di Sidebar */}
