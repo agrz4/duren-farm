@@ -2,14 +2,22 @@ import React, { useState } from 'react';
 import { MdOutlineEdit, MdOutlineDeleteOutline } from "react-icons/md";
 import type { Product } from '../types';
 import { HiOutlineFilter, HiOutlineSearch, HiPlus } from 'react-icons/hi';
+import AddProductModal from '../components/AddProductModal';
 
 const ProductPage: React.FC = () => {
     // Mock data produk
-    const [products] = useState<Product[]>([
+    const [products, setProducts] = useState<Product[]>([
         { id: 1, name: "Musang King Super", stock: 12, total: 30, price: 150000, harvestTime: "05:30 AM" },
         { id: 2, name: "Bawor Banyumas", stock: 4, total: 20, price: 125000, harvestTime: "06:15 AM" },
         { id: 3, name: "Durian Montong", stock: 25, total: 50, price: 85000, harvestTime: "07:00 AM" },
     ]);
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleAddProduct = (newProduct: Product) => {
+        setProducts([...products, newProduct]);
+        setIsModalOpen(false);
+    };
 
     return (
         <div className="bg-white rounded-[3rem] p-8 shadow-sm min-h-screen">
@@ -19,10 +27,6 @@ const ProductPage: React.FC = () => {
                     <h2 className="text-2xl font-bold text-slate-800">Product Management</h2>
                     <p className="text-sm text-slate-400">Manage your durian stocks and harvest details</p>
                 </div>
-                <button className="bg-emerald-600 text-white px-6 py-3 rounded-2xl text-sm font-bold shadow-lg shadow-emerald-100 flex items-center gap-2 hover:bg-emerald-700 transition-all">
-                    <HiPlus size={20} />
-                    Add New Product
-                </button>
             </div>
 
             {/* Toolbar: Search & Filter */}
@@ -38,6 +42,13 @@ const ProductPage: React.FC = () => {
                 <button className="flex items-center gap-2 px-6 py-3 bg-slate-50 text-slate-600 rounded-2xl text-sm font-semibold hover:bg-slate-100 transition-all">
                     <HiOutlineFilter size={20} />
                     Filter
+                </button>
+                <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="bg-emerald-600 text-white px-6 py-3 rounded-2xl text-sm font-bold shadow-lg shadow-emerald-100 flex items-center gap-2 hover:bg-emerald-700 transition-all"
+                >
+                    <HiPlus size={20} />
+                    Add New Product
                 </button>
             </div>
 
@@ -103,6 +114,13 @@ const ProductPage: React.FC = () => {
                     </tbody>
                 </table>
             </div>
+
+            {/* Modal */}
+            <AddProductModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onAddProduct={handleAddProduct}
+            />
         </div>
     );
 };
