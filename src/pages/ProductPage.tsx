@@ -13,10 +13,32 @@ const ProductPage: React.FC = () => {
     ]);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [editingProduct, setEditingProduct] = useState<Product | null>(null);
 
-    const handleAddProduct = (newProduct: Product) => {
-        setProducts([...products, newProduct]);
+    const handleSaveProduct = (product: Product) => {
+        if (editingProduct) {
+            setProducts(products.map(p => p.id === product.id ? product : p));
+        } else {
+            setProducts([...products, product]);
+        }
         setIsModalOpen(false);
+        setEditingProduct(null);
+    };
+
+    const handleEditProduct = (product: Product) => {
+        setEditingProduct(product);
+        setIsModalOpen(true);
+    };
+
+    const handleDeleteProduct = (id: number) => {
+        if (window.confirm("Are you sure you want to delete this product?")) {
+            setProducts(products.filter(p => p.id !== id));
+        }
+    };
+
+    const openAddModal = () => {
+        setEditingProduct(null);
+        setIsModalOpen(true);
     };
 
     return (
@@ -44,7 +66,7 @@ const ProductPage: React.FC = () => {
                     Filter
                 </button>
                 <button
-                    onClick={() => setIsModalOpen(true)}
+                    onClick={openAddModal}
                     className="bg-emerald-600 text-white px-6 py-3 rounded-2xl text-sm font-bold shadow-lg shadow-emerald-100 flex items-center gap-2 hover:bg-emerald-700 transition-all"
                 >
                     <HiPlus size={20} />
@@ -101,10 +123,16 @@ const ProductPage: React.FC = () => {
                                 </td>
                                 <td className="px-4 py-6">
                                     <div className="flex justify-center gap-2">
-                                        <button className="p-2 text-slate-400 hover:bg-white hover:text-emerald-600 hover:shadow-sm rounded-xl transition-all">
+                                        <button
+                                            onClick={() => handleEditProduct(p)}
+                                            className="p-2 text-slate-400 hover:bg-white hover:text-emerald-600 hover:shadow-sm rounded-xl transition-all"
+                                        >
                                             <MdOutlineEdit size={20} />
                                         </button>
-                                        <button className="p-2 text-slate-400 hover:bg-white hover:text-rose-600 hover:shadow-sm rounded-xl transition-all">
+                                        <button
+                                            onClick={() => handleDeleteProduct(p.id)}
+                                            className="p-2 text-slate-400 hover:bg-white hover:text-rose-600 hover:shadow-sm rounded-xl transition-all"
+                                        >
                                             <MdOutlineDeleteOutline size={20} />
                                         </button>
                                     </div>
@@ -119,7 +147,8 @@ const ProductPage: React.FC = () => {
             <AddProductModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
-                onAddProduct={handleAddProduct}
+                onSave={handleSaveProduct}
+                productToEdit={editingProduct}
             />
         </div>
     );

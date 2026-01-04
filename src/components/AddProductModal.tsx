@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { HiOutlineXMark } from "react-icons/hi2";
 import { MdOutlineSave, MdOutlineImage } from "react-icons/md";
 import type { Product } from '../types';
@@ -6,13 +6,28 @@ import type { Product } from '../types';
 interface AddProductModalProps {
     isOpen: boolean;
     onClose: () => void;
-    onAddProduct: (product: Product) => void;
+    onSave: (product: Product) => void;
+    productToEdit?: Product | null;
 }
 
-const AddProductModal: React.FC<AddProductModalProps> = ({ isOpen, onClose, onAddProduct }) => {
+const AddProductModal: React.FC<AddProductModalProps> = ({ isOpen, onClose, onSave, productToEdit }) => {
     const [name, setName] = useState('');
     const [price, setPrice] = useState('');
     const [stock, setStock] = useState('');
+
+    useEffect(() => {
+        if (isOpen) {
+            if (productToEdit) {
+                setName(productToEdit.name);
+                setPrice(productToEdit.price.toString());
+                setStock(productToEdit.stock.toString());
+            } else {
+                setName('');
+                setPrice('');
+                setStock('');
+            }
+        }
+    }, [isOpen, productToEdit]);
 
     if (!isOpen) return null;
 
@@ -21,20 +36,17 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ isOpen, onClose, onAd
 
         if (!name || !price || !stock) return alert("Mohon isi semua data!");
 
-        const newProduct: Product = {
-            id: Date.now(),
+        const productData: Product = {
+            id: productToEdit ? productToEdit.id : Date.now(),
             name,
             price: Number(price),
             stock: Number(stock),
-            total: Number(stock),
-            harvestTime: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            total: productToEdit ? productToEdit.total : Number(stock), // Preserve total if editing, or use stock
+            harvestTime: productToEdit ? productToEdit.harvestTime : new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + " AM",
+            image: productToEdit?.image
         };
 
-        onAddProduct(newProduct);
-
-        setName('');
-        setPrice('');
-        setStock('');
+        onSave(productData);
         onClose();
     };
 
@@ -44,7 +56,9 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ isOpen, onClose, onAd
 
                 {/* Header Modal */}
                 <div className="flex justify-between items-center p-8 border-b border-slate-50">
-                    <h3 className="text-xl font-bold text-slate-800">Add New Harvest</h3>
+                    <h3 className="text-xl font-bold text-slate-800">
+                        {productToEdit ? 'Edit Harvest' : 'Add New Harvest'}
+                    </h3>
                     <button
                         onClick={onClose}
                         className="p-2 hover:bg-slate-100 rounded-xl text-slate-400 transition-colors"
