@@ -14,6 +14,7 @@ const ProductPage: React.FC = () => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+    const [searchQuery, setSearchQuery] = useState('');
 
     const handleSaveProduct = (product: Product) => {
         if (editingProduct) {
@@ -41,6 +42,10 @@ const ProductPage: React.FC = () => {
         setIsModalOpen(true);
     };
 
+    const filteredProducts = products.filter(product =>
+        product.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
     return (
         <div className="bg-white rounded-[3rem] p-8 shadow-sm min-h-screen">
             {/* Header Section */}
@@ -57,6 +62,8 @@ const ProductPage: React.FC = () => {
                     <HiOutlineSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 size={20}" />
                     <input
                         type="text"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
                         placeholder="Search durian name..."
                         className="w-full pl-12 pr-4 py-3 bg-slate-50 border-none rounded-2xl text-sm focus:ring-2 focus:ring-emerald-500 outline-none transition-all"
                     />
@@ -87,7 +94,7 @@ const ProductPage: React.FC = () => {
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-50">
-                        {products.map((p) => (
+                        {filteredProducts.map((p) => (
                             <tr key={p.id} className="hover:bg-slate-50/50 transition-colors group">
                                 <td className="px-4 py-6">
                                     <div className="flex items-center gap-3">
