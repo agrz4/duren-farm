@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
 import ProductPage from './pages/ProductPage';
+import AnalyticsPage from './pages/AnalyticsPage';
 
 const App: React.FC = () => {
   return (
@@ -14,6 +15,7 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/products" element={<ProductPage />} />
+            <Route path="/analytics" element={<AnalyticsPage />} />
           </Routes>
         </main>
       </div>
