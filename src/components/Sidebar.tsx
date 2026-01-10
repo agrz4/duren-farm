@@ -1,6 +1,6 @@
 import React from 'react';
 import { MdOutlineDashboard, MdOutlineInventory2, MdOutlineAnalytics, MdOutlineChatBubbleOutline, MdOutlineStarOutline } from "react-icons/md";
-import { HiOutlineShoppingBag } from "react-icons/hi2";
+import { HiOutlineShoppingBag, HiOutlineDocumentText } from "react-icons/hi2";
 import { Link, useLocation } from 'react-router-dom';
 
 const Sidebar: React.FC = () => {
@@ -10,6 +10,7 @@ const Sidebar: React.FC = () => {
     { name: 'Dashboard', icon: <MdOutlineDashboard />, path: '/' },
     { name: 'Product', icon: <MdOutlineInventory2 />, path: '/products' },
     { name: 'Analytics', icon: <MdOutlineAnalytics />, path: '/analytics' },
+    { name: 'Detail Order', icon: <HiOutlineDocumentText />, path: '/orders/detail' },
     { name: 'Sale', icon: <HiOutlineShoppingBag />, path: '/sales' },
     { name: 'Review', icon: <MdOutlineStarOutline />, path: '/reviews' },
     { name: 'Chat', icon: <MdOutlineChatBubbleOutline />, path: '/chat' },

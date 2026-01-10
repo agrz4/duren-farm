@@ -1,9 +1,16 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Dashboard from './pages/Dashboard';
 import ProductPage from './pages/ProductPage';
 import AnalyticsPage from './pages/AnalyticsPage';
+import OrderDetailPage from './pages/OrderDetailPage';
+import ReviewPage from './pages/ReviewPage';
+
+const OrderDetailWrapper: React.FC = () => {
+  const navigate = useNavigate();
+  return <OrderDetailPage onBack={() => navigate(-1)} />;
+};
 
 const App: React.FC = () => {
   return (
@@ -16,6 +23,8 @@ const App: React.FC = () => {
             <Route path="/" element={<Dashboard />} />
             <Route path="/products" element={<ProductPage />} />
             <Route path="/analytics" element={<AnalyticsPage />} />
+            <Route path="/orders/detail" element={<OrderDetailWrapper />} />
+            <Route path="/reviews" element={<ReviewPage />} />
           </Routes>
         </main>
       </div>
