@@ -6,6 +6,7 @@ import ProductPage from './pages/ProductPage';
 import AnalyticsPage from './pages/AnalyticsPage';
 import OrderDetailPage from './pages/OrderDetailPage';
 import ReviewPage from './pages/ReviewPage';
+import SettingsPage from './pages/SettingsPage';
 
 const OrderDetailWrapper: React.FC = () => {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ const App: React.FC = () => {
             <Route path="/analytics" element={<AnalyticsPage />} />
             <Route path="/orders/detail" element={<OrderDetailWrapper />} />
             <Route path="/reviews" element={<ReviewPage />} />
+            <Route path="/settings" element={<SettingsPage />} />
           </Routes>
         </main>
       </div>
