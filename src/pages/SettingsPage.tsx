@@ -188,6 +188,71 @@ const SettingsPage: React.FC = () => {
                         </div>
                     </div>
                 );
+            case 'Notifikasi':
+                return (
+                    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                        {/* Header Section */}
+                        <div className="flex items-center gap-4 pb-6 border-b border-slate-200/60">
+                            <div className="w-20 h-20 bg-orange-100 rounded-[2rem] flex items-center justify-center text-orange-600 border-4 border-white shadow-sm">
+                                <HiOutlineBell size={40} />
+                            </div>
+                            <div>
+                                <h4 className="text-xl font-black text-slate-800">Preferensi Notifikasi</h4>
+                                <p className="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">Atur kapan kami menghubungi Anda</p>
+                            </div>
+                        </div>
+
+                        {/* Order Alerts */}
+                        <div className="space-y-4">
+                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Notifikasi Pesanan</p>
+                            <div className="bg-white rounded-[2rem] p-6 shadow-sm space-y-6">
+                                {[
+                                    { title: "Pesanan Baru Masuk", desc: "Dapatkan notifikasi real-time saat ada pesanan baru", active: true },
+                                    { title: "Status Pembayaran", desc: "Info saat pembayaran berhasil dikonfirmasi", active: true },
+                                    { title: "Komplain Pelanggan", desc: "Notifikasi prioritas untuk masalah pesanan", active: true }
+                                ].map((item, idx) => (
+                                    <div key={idx} className="flex items-center justify-between">
+                                        <div className="pr-4">
+                                            <p className="font-bold text-slate-800 text-sm">{item.title}</p>
+                                            <p className="text-xs text-slate-400 mt-1">{item.desc}</p>
+                                        </div>
+                                        <div className={`w-12 h-6 rounded-full relative cursor-pointer transition-colors ${item.active ? 'bg-orange-500' : 'bg-slate-200'}`}>
+                                            <div className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow-sm transition-all ${item.active ? 'right-1' : 'left-1'}`}></div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Inventory Alerts */}
+                        <div className="space-y-4">
+                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Inventaris & Kebun</p>
+                            <div className="bg-white rounded-[2rem] p-6 shadow-sm space-y-6">
+                                {[
+                                    { title: "Stok Menipis", desc: "Peringatan saat stok varietas tertentu di bawah 5 kg", active: true },
+                                    { title: "Jadwal Panen", desc: "Reminder H-1 sebelum jadwal panen raya", active: false }
+                                ].map((item, idx) => (
+                                    <div key={idx} className="flex items-center justify-between">
+                                        <div className="pr-4">
+                                            <p className="font-bold text-slate-800 text-sm">{item.title}</p>
+                                            <p className="text-xs text-slate-400 mt-1">{item.desc}</p>
+                                        </div>
+                                        <div className={`w-12 h-6 rounded-full relative cursor-pointer transition-colors ${item.active ? 'bg-orange-500' : 'bg-slate-200'}`}>
+                                            <div className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow-sm transition-all ${item.active ? 'right-1' : 'left-1'}`}></div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Action Buttons */}
+                        <div className="flex gap-4 pt-6 border-t border-slate-200/60">
+                            <button className="flex-1 bg-slate-900 text-white py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-800 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1">
+                                Simpan Preferensi
+                            </button>
+                        </div>
+                    </div>
+                );
             default:
                 return (
                     <div className="flex flex-col items-center justify-center h-96 text-center animate-in fade-in zoom-in duration-500">
