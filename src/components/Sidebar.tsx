@@ -40,16 +40,6 @@ const Sidebar: React.FC = () => {
           );
         })}
       </nav>
-
-      {/* Promo Card di Sidebar */}
-      <div className="mt-20 p-4 bg-emerald-900 rounded-[2rem] text-white relative overflow-hidden">
-        <div className="relative z-10">
-          <p className="text-[10px] opacity-70">Special Harvest</p>
-          <p className="text-lg font-bold leading-tight mt-1">Get Discount</p>
-          <p className="text-3xl font-black mt-2">65%</p>
-        </div>
-        <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-emerald-500/20 rounded-full blur-2xl"></div>
-      </div>
     </div>
   );
 };
