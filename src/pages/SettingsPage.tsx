@@ -253,6 +253,74 @@ const SettingsPage: React.FC = () => {
                         </div>
                     </div>
                 );
+            case 'Jam Operasional':
+                return (
+                    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                        {/* Header Section */}
+                        <div className="flex items-center gap-4 pb-6 border-b border-slate-200/60">
+                            <div className="w-20 h-20 bg-emerald-100 rounded-[2rem] flex items-center justify-center text-emerald-600 border-4 border-white shadow-sm">
+                                <HiOutlineClock size={40} />
+                            </div>
+                            <div>
+                                <h4 className="text-xl font-black text-slate-800">Jam Operasional</h4>
+                                <p className="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">Atur jadwal buka tutup kebun</p>
+                            </div>
+                        </div>
+
+                        {/* Store Status Toggle */}
+                        <div className="bg-slate-900 rounded-[2rem] p-6 shadow-xl text-white flex items-center justify-between">
+                            <div>
+                                <p className="font-bold text-lg">Status Toko: BUKA</p>
+                                <p className="text-xs text-slate-400 mt-1">Pelanggan dapat memesan durian sekarang</p>
+                            </div>
+                            <div className="w-16 h-8 bg-emerald-500 rounded-full relative cursor-pointer hover:bg-emerald-400 transition-colors">
+                                <div className="absolute right-1 top-1 w-6 h-6 bg-white rounded-full shadow-sm"></div>
+                            </div>
+                        </div>
+
+                        {/* Weekly Schedule */}
+                        <div className="space-y-4">
+                            <div className="flex justify-between items-end">
+                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Jadwal Mingguan</p>
+                                <button className="text-[10px] font-bold text-emerald-600 hover:text-emerald-700">Setiap Hari Sama</button>
+                            </div>
+
+                            <div className="bg-white rounded-[2rem] p-6 shadow-sm space-y-4">
+                                {['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'].map((day, idx) => (
+                                    <div key={idx} className="flex items-center justify-between py-2 border-b border-slate-50 last:border-0 hover:bg-slate-50/50 rounded-xl px-2 transition-colors">
+                                        <div className="flex items-center gap-4 w-32">
+                                            <div className={`w-8 h-4 rounded-full relative cursor-pointer transition-colors ${idx !== 6 ? 'bg-emerald-500' : 'bg-slate-200'}`}>
+                                                <div className={`absolute top-0.5 w-3 h-3 bg-white rounded-full shadow-sm transition-all ${idx !== 6 ? 'right-0.5' : 'left-0.5'}`}></div>
+                                            </div>
+                                            <span className={`text-sm font-bold ${idx !== 6 ? 'text-slate-800' : 'text-slate-400'}`}>{day}</span>
+                                        </div>
+
+                                        {idx !== 6 ? (
+                                            <div className="flex items-center gap-3">
+                                                <div className="relative">
+                                                    <input type="time" defaultValue="08:00" className="bg-slate-50 border-none rounded-xl text-xs font-bold text-slate-600 py-2 px-3 focus:ring-2 focus:ring-emerald-500 outline-none" />
+                                                </div>
+                                                <span className="text-slate-300 font-bold">-</span>
+                                                <div className="relative">
+                                                    <input type="time" defaultValue="17:00" className="bg-slate-50 border-none rounded-xl text-xs font-bold text-slate-600 py-2 px-3 focus:ring-2 focus:ring-emerald-500 outline-none" />
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <span className="text-xs font-bold text-slate-300 uppercase tracking-widest px-4">Tutup</span>
+                                        )}
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Action Buttons */}
+                        <div className="flex gap-4 pt-6 border-t border-slate-200/60">
+                            <button className="flex-1 bg-slate-900 text-white py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-800 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1">
+                                Simpan Jadwal
+                            </button>
+                        </div>
+                    </div>
+                );
             default:
                 return (
                     <div className="flex flex-col items-center justify-center h-96 text-center animate-in fade-in zoom-in duration-500">
