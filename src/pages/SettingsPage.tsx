@@ -321,6 +321,95 @@ const SettingsPage: React.FC = () => {
                         </div>
                     </div>
                 );
+            case 'Metode Pembayaran':
+                return (
+                    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+                        {/* Header Section */}
+                        <div className="flex items-center gap-4 pb-6 border-b border-slate-200/60">
+                            <div className="w-20 h-20 bg-violet-100 rounded-[2rem] flex items-center justify-center text-violet-600 border-4 border-white shadow-sm">
+                                <MdOutlinePayments size={40} />
+                            </div>
+                            <div>
+                                <h4 className="text-xl font-black text-slate-800">Metode Pembayaran</h4>
+                                <p className="text-xs text-slate-400 font-bold uppercase tracking-widest mt-1">Atur rekening penerimaan dana</p>
+                            </div>
+                        </div>
+
+                        {/* Connected Accounts */}
+                        <div className="space-y-4">
+                            <div className="flex justify-between items-end">
+                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Rekening Terhubung</p>
+                                <button className="text-[10px] font-bold text-emerald-600 hover:text-emerald-700 underline">Tambah Rekening</button>
+                            </div>
+
+                            <div className="grid grid-cols-1 gap-4">
+                                <div className="bg-slate-900 rounded-[2rem] p-6 shadow-xl text-white relative overflow-hidden group">
+                                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full blur-2xl -mr-10 -mt-10"></div>
+                                    <div className="flex justify-between items-start mb-6">
+                                        <div className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center text-xl font-bold">
+                                            🏦
+                                        </div>
+                                        <span className="bg-emerald-500 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest">Utama</span>
+                                    </div>
+                                    <div className="space-y-1">
+                                        <p className="font-mono text-xl tracking-widest text-slate-300">**** **** 8829</p>
+                                        <div className="flex justify-between items-end">
+                                            <div>
+                                                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-widest mt-4">Pemilik Rekening</p>
+                                                <p className="font-bold">DurenFarm Official</p>
+                                            </div>
+                                            <p className="font-black text-xl italic">BCA</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div className="bg-white border border-slate-100 rounded-[2rem] p-6 hover:shadow-lg transition-all group cursor-pointer">
+                                    <div className="flex justify-between items-center">
+                                        <div className="flex items-center gap-4">
+                                            <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center text-xl font-bold">
+                                                💳
+                                            </div>
+                                            <div>
+                                                <p className="font-bold text-slate-800">Mandiri Corporate</p>
+                                                <p className="text-xs text-slate-400 font-medium">**** 3321</p>
+                                            </div>
+                                        </div>
+                                        <div className="w-6 h-6 rounded-full border-2 border-slate-200 group-hover:border-emerald-500 group-hover:bg-emerald-50 transition-all"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Payment Toggles */}
+                        <div className="space-y-4">
+                            <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Opsi Pembayaran Aktif</p>
+                            <div className="bg-white rounded-[2rem] p-6 shadow-sm space-y-6">
+                                {[
+                                    { title: "Cash on Delivery (COD)", desc: "Terima tunai saat barang sampai", active: true },
+                                    { title: "QRIS Static", desc: "Tampilkan kode QR saat checkout", active: true },
+                                    { title: "Virtual Account", desc: "Verifikasi pembayaran otomatis", active: false }
+                                ].map((item, idx) => (
+                                    <div key={idx} className="flex items-center justify-between">
+                                        <div className="pr-4">
+                                            <p className="font-bold text-slate-800 text-sm">{item.title}</p>
+                                            <p className="text-xs text-slate-400 mt-1">{item.desc}</p>
+                                        </div>
+                                        <div className={`w-12 h-6 rounded-full relative cursor-pointer transition-colors ${item.active ? 'bg-emerald-500' : 'bg-slate-200'}`}>
+                                            <div className={`absolute top-1 w-4 h-4 bg-white rounded-full shadow-sm transition-all ${item.active ? 'right-1' : 'left-1'}`}></div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Action Buttons */}
+                        <div className="flex gap-4 pt-6 border-t border-slate-200/60">
+                            <button className="flex-1 bg-slate-900 text-white py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-800 transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1">
+                                Simpan Konfigurasi
+                            </button>
+                        </div>
+                    </div>
+                );
             default:
                 return (
                     <div className="flex flex-col items-center justify-center h-96 text-center animate-in fade-in zoom-in duration-500">
