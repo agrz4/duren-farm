@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { HiOutlineArrowLeft, HiOutlineShoppingBag, HiOutlineChevronRight } from "react-icons/hi2";
-import { MdOutlineAttachMoney, MdOutlineCalendarToday } from "react-icons/md";
+import { HiOutlineArrowLeft } from "react-icons/hi2";
+import musangKingImg from '../assets/img/musang king.png';
 
 // Tipe data untuk Order
 interface Order {
@@ -28,69 +28,72 @@ const MOCK_ORDERS: Order[] = [
 // Component Halaman Depan: List Pesanan
 const OrderListView: React.FC<{ onSelectOrder: (order: Order) => void, onBack: () => void }> = ({ onSelectOrder, onBack }) => {
     return (
-        <div className="bg-white rounded-[3rem] p-10 shadow-sm min-h-screen border border-slate-50">
-            {/* Header List */}
-            <div className="flex items-center gap-4 mb-10">
-                <button
-                    onClick={onBack}
-                    className="p-3 bg-slate-50 hover:bg-slate-200 rounded-2xl text-slate-600 transition-colors duration-200"
-                >
-                    <HiOutlineArrowLeft size={20} />
-                </button>
-                <div>
-                    <h2 className="text-3xl font-black text-slate-800 tracking-tight">Daftar Pesanan</h2>
-                    <p className="text-sm text-slate-400 font-medium mt-1">Pilih pesanan untuk melihat detail lengkap</p>
-                </div>
-            </div>
-
-            {/* Grid List Pesanan */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-                {MOCK_ORDERS.map((order) => (
-                    <div
-                        key={order.id}
-                        onClick={() => onSelectOrder(order)}
-                        className="group bg-slate-50 hover:bg-white border border-slate-100 p-6 rounded-[2.5rem] cursor-pointer hover:shadow-xl hover:border-emerald-100 transition-all duration-300 relative overflow-hidden"
-                    >
-                        <div className="flex justify-between items-start mb-6">
-                            <div className="flex gap-4 items-center">
-                                <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shadow-sm ${order.status === 'Selesai' ? 'bg-emerald-100 text-emerald-600' :
-                                    order.status === 'Proses' ? 'bg-orange-100 text-orange-600' :
-                                        order.status === 'Dikirim' ? 'bg-blue-100 text-blue-600' : 'bg-rose-100 text-rose-600'
-                                    }`}>
-                                    <HiOutlineShoppingBag />
-                                </div>
-                                <div>
-                                    <h4 className="font-bold text-slate-800 text-lg tracking-tight">{order.id}</h4>
-                                    <p className="text-xs text-slate-500 font-medium">{order.customer}</p>
-                                </div>
-                            </div>
-                            <div className={`px-4 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest ${order.status === 'Selesai' ? 'bg-emerald-100 text-emerald-600' :
-                                order.status === 'Proses' ? 'bg-orange-100 text-orange-600' :
-                                    order.status === 'Dikirim' ? 'bg-blue-100 text-blue-600' : 'bg-rose-100 text-rose-600'
-                                }`}>
-                                {order.status}
-                            </div>
-                        </div>
-
-                        <div className="space-y-3 mb-6">
-                            <div className="flex items-center gap-3 text-sm text-slate-500">
-                                <MdOutlineCalendarToday className="text-slate-400" size={18} />
-                                <span className="font-semibold">{order.date} • {order.time}</span>
-                            </div>
-                            <div className="flex items-center gap-3 text-sm text-slate-500">
-                                <MdOutlineAttachMoney className="text-slate-400" size={18} />
-                                <span className="font-bold text-slate-800">Rp {order.total.toLocaleString('id-ID')}</span>
-                            </div>
-                        </div>
-
-                        <div className="flex justify-between items-center pt-4 border-t border-slate-200/50">
-                            <p className="text-xs text-slate-400 font-medium truncate max-w-[200px]">{order.items}</p>
-                            <span className="p-2 bg-white rounded-full text-slate-300 group-hover:bg-emerald-500 group-hover:text-white transition-colors shadow-sm">
-                                <HiOutlineChevronRight size={16} />
-                            </span>
-                        </div>
+        <div className="bg-white min-h-screen font-sans flex text-slate-800">
+            {/* Main Content */}
+            <div className="w-full max-w-6xl mx-auto p-6 md:p-10">
+                {/* Header & Tabs */}
+                <div className="mb-12">
+                    <div className="flex items-center gap-4 mb-8">
+                        <button
+                            onClick={onBack}
+                            className="xl:hidden p-2 bg-slate-50 hover:bg-slate-200 rounded-xl text-slate-600 transition-colors"
+                        >
+                            <HiOutlineArrowLeft size={20} />
+                        </button>
+                        <h2 className="text-2xl font-bold">Order List</h2>
                     </div>
-                ))}
+
+                    <div className="flex gap-8 border-b border-slate-100 overflow-x-auto pb-1 no-scrollbar">
+                        {['All', 'Waiting Payment', 'Order On Process', 'In Delivery', 'Complete Order', 'Refund'].map((tab, i) => (
+                            <button
+                                key={tab}
+                                className={`text-sm font-bold whitespace-nowrap pb-4 border-b-2 transition-all ${tab === 'Order On Process' ? 'text-slate-900 border-slate-900' : 'text-slate-400 border-transparent hover:text-slate-600'
+                                    }`}
+                            >
+                                {tab === 'Waiting Payment' ? (
+                                    <span>Waiting Payment <span className="ml-1 px-1.5 py-0.5 rounded-full bg-slate-100 text-[10px] text-slate-600">3</span></span>
+                                ) : tab}
+                            </button>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Orders List */}
+                <div className="space-y-12">
+                    {MOCK_ORDERS.map((order) => (
+                        <div key={order.id} className="group">
+                            {/* Order Item Card */}
+                            <div
+                                onClick={() => onSelectOrder(order)}
+                                className="bg-white border border-slate-100 rounded-3xl p-4 md:p-6 hover:shadow-lg transition-all cursor-pointer flex flex-col md:flex-row gap-6 md:gap-8 items-start md:items-center group"
+                            >
+                                {/* Product Image */}
+                                <div className="w-24 h-28 bg-slate-50 rounded-xl flex-shrink-0 relative overflow-hidden border border-slate-100 shadow-sm">
+                                    <img src={musangKingImg} alt={order.items} className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
+                                </div>
+
+                                {/* Info */}
+                                <div className="flex-1 w-full text-left">
+                                    <p className="text-[11px] font-bold text-slate-400 mb-1">Harvest Season Collection</p>
+                                    <h4 className="text-lg font-bold text-slate-900 mb-4">{order.items}</h4>
+
+                                    <div className="flex items-center gap-6">
+                                        <span className="text-sm font-bold text-slate-600">1.8 kg</span>
+                                        <span className="text-sm font-bold text-slate-600">Super Grade</span>
+                                        <div className="w-5 h-5 rounded bg-amber-300 border border-slate-200 shadow-sm"></div>
+                                    </div>
+                                </div>
+
+                                {/* Price / Qty */}
+                                <div className="border border-slate-200 px-6 py-3 rounded-2xl bg-white self-center md:self-center">
+                                    <span className="font-bold text-slate-800 text-sm">
+                                        1 × Rp {(order.total).toLocaleString('id-ID')}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
             </div>
         </div>
     );

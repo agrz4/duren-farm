@@ -1,73 +1,88 @@
-# React + TypeScript + Vite
+# 🚜 Duren Farm Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Selamat datang di repository proyek **Duren Farm**. Ini adalah aplikasi web dashboard modern yang dibangun untuk membantu manajemen operasional bisnis pertanian durian. Aplikasi ini mencakup fitur pengelolaan produk, analisis penjualan, manajemen pesanan, dan ulasan pelanggan.
 
-Currently, two official plugins are available:
+## 📋 Deskripsi
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Duren Farm Dashboard** adalah sistem manajemen terpadu yang dirancang untuk memudahkan pemilik bisnis dalam memantau dan mengelola aktivitas harian mereka. Dengan antarmuka yang responsif dan fitur yang lengkap, aplikasi ini membantu dalam pengambilan keputusan berbasis data.
 
-## React Compiler
+## ✨ Fitur Utama
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Aplikasi ini memiliki beberapa halaman utama dengan fungsionalitas spesifik:
 
-## Expanding the ESLint configuration
+- **🏠 Dashboard Utama**: Ringkasan cepat kinerja bisnis, statistik penjualan, dan notifikasi penting.
+- **📦 Manajemen Produk (`ProductPage`)**: Kelola inventaris durian, tambahkan produk baru, edit detail, dan atur stok.
+- **📊 Analitik (`AnalyticsPage`)**: Visualisasi data penjualan dan kinerja toko menggunakan grafik interaktif (Chart.js) untuk wawasan yang lebih mendalam.
+- **📝 Detail Pesanan (`OrderDetailPage`)**: Pantau status pesanan pelanggan, rincian transaksi, dan riwayat pemesanan.
+- **⭐ Ulasan Pelanggan (`ReviewPage`)**: Kelola dan tanggapi ulasan dari pelanggan untuk menjaga reputasi dan kepuasan pelanggan.
+- **⚙️ Pengaturan (`SettingsPage`)**: Konfigurasi aplikasi, termasuk metode pembayaran, jam operasional toko, dan preferensi akun.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🛠️ Teknologi yang Digunakan
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Proyek ini dibangun menggunakan teknologi web modern untuk memastikan performa tinggi dan kemudahan pengembangan:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **[React](https://react.dev/)**: Library UI untuk membangun antarmuka pengguna yang interaktif.
+- **[TypeScript](https://www.typescriptlang.org/)**: Superset JavaScript yang menambahkan tipe statis untuk kode yang lebih aman dan mudah dipelihara.
+- **[Vite](https://vitejs.dev/)**: Build tool super cepat untuk pengembangan frontend modern.
+- **[Tailwind CSS](https://tailwindcss.com/)**: Framework CSS utility-first untuk styling yang cepat dan responsif (menggunakan v4).
+- **[Chart.js](https://www.chartjs.org/)** & **[react-chartjs-2](https://react-chartjs-2.js.org/)**: Untuk visualisasi data dan grafik yang menarik.
+- **[React Router](https://reactrouter.com/)**: Untuk navigasi antar halaman (SPA).
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🚀 Cara Menjalankan Project
+
+Ikuti langkah-langkah berikut untuk menjalankan aplikasi ini di komputer lokal Anda:
+
+### Prasyarat
+
+Pastikan Anda telah menginstal [Node.js](https://nodejs.org/) (versi terbaru direkomendasikan).
+
+### Instalasi
+
+1. **Clone repository ini** (jika menggunakan git) atau unduh filenya.
+2. **Buka terminal** di direktori root project.
+3. **Instal dependensi** dengan menjalankan perintah:
+   ```bash
+   npm install
+   ```
+
+### Menjalankan Server Development
+
+Untuk memulai server pengembangan lokal:
+```bash
+npm run dev
+```
+Aplikasi akan dapat diakses di `http://localhost:5173` (atau port lain yang ditampilkan di terminal).
+
+### Build untuk Produksi
+
+Untuk membuat build produksi yang optimal:
+```bash
+npm run build
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📂 Struktur Folder
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+duren-farm/
+├── public/              # Aset statis publik
+├── src/
+│   ├── assets/          # Gambar, font, dan aset lainnya
+│   ├── components/      # Komponen UI yang dapat digunakan kembali
+│   ├── pages/           # Halaman-halaman utama aplikasi
+│   │   ├── Dashboard.tsx
+│   │   ├── ProductPage.tsx
+│   │   ├── AnalyticsPage.tsx
+│   │   ├── OrderDetailPage.tsx
+│   │   ├── ReviewPage.tsx
+│   │   └── SettingsPage.tsx
+│   ├── types/           # Definisi tipe TypeScript
+│   ├── App.tsx          # Komponen utama dan konfigurasi routing
+│   └── main.tsx         # Entry point aplikasi
+├── index.html           # File HTML utama
+├── package.json         # Manifest dependensi dan skrip proyek
+├── tailwind.config.js   # Konfigurasi Tailwind CSS
+└── vite.config.ts       # Konfigurasi Vite
+```
+
+---
+Dibuat dengan ❤️ oleh Tim Duren Farm.
