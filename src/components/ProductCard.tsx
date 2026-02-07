@@ -19,7 +19,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onBuy, onAddStock })
           <img
             src={product.image}
             alt={product.name}
-            className="w-full h-full object-cover"
+            className={`w-full h-full object-cover ${product.stock === 0 ? 'grayscale opacity-60' : ''}`}
           />
         ) : (
           <div className="w-full h-full bg-slate-200 flex items-center justify-center text-slate-400">
@@ -27,11 +27,20 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, onBuy, onAddStock })
           </div>
         )}
 
+        {product.stock === 0 && (
+          <div className="absolute inset-0 z-20 flex items-center justify-center">
+            <div className="bg-black/30 absolute inset-0 backdrop-blur-[2px]"></div>
+            <span className="relative bg-rose-500 text-white px-6 py-2 rounded-2xl font-black text-sm uppercase tracking-widest shadow-xl rotate-[-6deg] border-4 border-white/20">
+              Habis
+            </span>
+          </div>
+        )}
+
         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
         <div className="absolute top-4 left-4 z-10">
           <span className="bg-white/90 backdrop-blur-md px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider shadow-sm flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span className={`w-1.5 h-1.5 rounded-full ${product.stock === 0 ? 'bg-rose-500' : 'bg-emerald-500 animate-pulse'}`}></span>
             {product.harvestTime} • Fresh
           </span>
         </div>
